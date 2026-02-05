@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby Panda ❤️ Dholu</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+font-family:'Poppins', sans-serif;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+section{padding:60px 15px;}
+
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+position:relative;
+overflow:hidden;
+}
+
+.collage-bg{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+align-items:center;
+gap:12px;
+padding:20px;
+z-index:0;
+}
+
+.collage-bg img{
+width:28%;
+height:30%;
+object-fit:cover;
+border-radius:14px;
+border:4px solid rgba(255,255,255,0.6);
+box-shadow:0 8px 20px rgba(0,0,0,0.35);
+opacity:0.4;
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+padding:20px;
+background:rgba(0,0,0,0.35);
+border-radius:20px;
+backdrop-filter:blur(6px);
+}
+
+.hero h1{
+font-family:'Great Vibes', cursive;
+font-size:2.5rem;
+margin-bottom:15px;
+}
+
+.letter{
+background:#fffaf0;
+color:#444;
+padding:25px 20px;
+border-radius:15px;
+max-width:420px;
+margin:auto;
+line-height:1.8;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+text-align:left;
+font-size:1.05rem;
+}
+
+.letter h2{
+font-family:'Great Vibes', cursive;
+text-align:center;
+color:#ff4d6d;
+margin-bottom:15px;
+}
+
+.signature{margin-top:20px;text-align:right;font-style:italic;}
+
+button{
+border:none;
+padding:14px 28px;
+margin:12px 8px;
+font-size:16px;
+border-radius:30px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.yes{background:#ff2e63;color:white;}
+.yes:hover{transform:scale(1.1);} 
+.no{background:#eee;color:black;}
+
+.heart,.petal,.confetti{position:fixed;pointer-events:none;}
+
+.heart{animation:float 6s linear infinite;}
+.petal{animation:fall 8s linear infinite;font-size:20px;}
+.confetti{animation:confettiFall 4s linear forwards;font-size:20px;}
+
+@keyframes float{from{transform:translateY(100vh);} to{transform:translateY(-10vh);opacity:0;}}
+@keyframes fall{from{transform:translateY(-10vh) rotate(0deg);} to{transform:translateY(110vh) rotate(360deg);opacity:0;}}
+@keyframes confettiFall{from{transform:translateY(-10vh) rotate(0deg);} to{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+
+.valentine-line{
+margin-top:15px;
+font-size:1.2rem;
+opacity:0;
+animation:fadeGlow 3s ease forwards 1.5s;
+}
+
+@keyframes fadeGlow{
+0%{opacity:0;transform:translateY(20px);} 
+100%{opacity:1;text-shadow:0 0 10px #ff4d6d;} 
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Put your romantic song file (example: kesariya.mp3) in the same folder as this HTML file -->
+<audio id="music" loop>
+<source src="kesariya.mp3" type="audio/mpeg">
+</audio>
+
+<section class="hero">
+<div class="collage-bg">
+<img src="photo1.jpg"><img src="photo2.jpg"><img src="photo3.jpg"><img src="photo4.jpg"><img src="photo5.jpg">
+</div>
+<div class="hero-content">
+<h1>For My Baby Panda 🐼❤️</h1>
+<p>A Love Letter From Your Dholu</p>
+<p style="font-size:0.9rem;opacity:0.85;">Tap anywhere & scroll slowly ❤️</p>
+</div>
+</section>
+
+<section>
+<div class="letter">
+<h2>My Dearest Baby Panda 💌</h2>
+<p id="typedText"></p>
+<div class="signature">Forever yours,<br>Your Dholu ❤️</div>
+</div>
+</section>
+
+<section>
+<h1>Will You Be My Valentine? ❤️</h1>
+<button class="yes" onclick="sayYes()">YES 💕</button>
+<button class="no" onclick="growYes(this)">No 😢</button>
+</section>
+
+<script>
+
+/* ---------- MUSIC ---------- */
+function playMusic(){
+const music=document.getElementById("music");
+if(music && music.paused){music.play().catch(()=>{});}
+}
+// Try multiple user interactions to guarantee music plays
+["click","touchstart","scroll"].forEach(event=>{
+  window.addEventListener(event, playMusic, { once:true });
+});
+
+/* ---------- TYPEWRITER ---------- */
+const text=`From the moment you came into my life, everything became brighter.
+Every laugh, every hug, every moment with you feels magical.
+
+From sharing one AirPod, vibing to songs together while riding on the bike, to all our random talks and beautiful memories… those small moments with you mean the world to me.
+
+Since our story truly began on 14th February 2022, my love for you has only grown stronger with every passing day.
+
+I don’t just see you in my present… I see you in my future, in my dreams, in every plan I make.
+
+And today, I want to ask you something straight from my heart...`;
+
+let i=0;
+function typeWriter(){
+if(i<text.length){
+document.getElementById("typedText").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typeWriter,35);
+}}
+typeWriter();
+
+/* ---------- YES ---------- */
+function sayYes(){
+const bgPhoto="photo1.jpg";
+
+document.body.innerHTML=`
+<style>
+body{margin:0;font-family:'Poppins';height:100vh;display:flex;justify-content:center;align-items:center;background:url('${bgPhoto}') center/cover no-repeat;position:relative;overflow:hidden;color:white;}
+body::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.45);} 
+.forever-card{position:relative;z-index:2;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);padding:45px 35px;border-radius:28px;text-align:center;max-width:500px;}
+.forever-card h1{font-family:'Great Vibes', cursive;font-size:2.6rem;margin-bottom:15px;}
+</style>
+
+<div class="forever-card">
+<h1>She Said YES 💍❤️</h1>
+<p>This is the beginning of our forever.</p>
+<h2>Dholu ❤️ Baby Panda Forever</h2>
+<p class="valentine-line">Get ready for a great Valentine's Day ❤️</p>
+</div>`;
+
+createHearts();
+createPetals();
+setTimeout(createConfetti,1500);
+}
+
+/* ---------- NO BUTTON ---------- */
+let noClickCount = 0;
+
+function growYes(btn){
+noClickCount++;
+
+const yesBtn = document.querySelector('.yes');
+
+if(noClickCount === 1){
+btn.style.position = "relative";
+btn.style.left = (Math.random() - 0.5) * 120 + "px";
+btn.style.top = (Math.random() - 0.5) * 60 + "px";
+}
+
+if(noClickCount === 2){
+btn.style.transform = "scale(0.6)";
+}
+
+if(noClickCount === 3){
+btn.style.animation = "spinNo 0.8s linear infinite";
+
+// Run away while spinning
+setInterval(()=>{
+btn.style.position = "relative";
+btn.style.left = (Math.random() - 0.5) * 250 + "px";
+btn.style.top = (Math.random() - 0.5) * 150 + "px";
+},700);
+}
+
+if(noClickCount >= 4){
+const container = btn.parentElement;
+container.innerHTML = `
+<button class="yes" onclick="sayYes()" style="font-size:20px;padding:18px 34px;">
+🐼 Baby Panda… Dholu ka dil mat todo… Only YES allowed ❤️
+</button>`;
+return;
+}
+
+let scale = parseFloat(yesBtn.dataset.scale || 1);
+scale += 0.2;
+yesBtn.dataset.scale = scale;
+yesBtn.style.transform = `scale(${scale})`;
+}
+
+/* ---------- ANIMATIONS ---------- */
+function createHearts(){
+setInterval(()=>{
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=Math.random()*25+15+"px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+},300);
+}
+
+function createPetals(){
+setInterval(()=>{
+const petal=document.createElement("div");
+petal.className="petal";
+petal.innerHTML="🌹";
+petal.style.left=Math.random()*100+"vw";
+document.body.appendChild(petal);
+setTimeout(()=>petal.remove(),8000);
+},800);
+}
+
+function createConfetti(){
+const emojis=["🎉","✨","💖","🎊"];
+for(let i=0;i<40;i++){
+const confetti=document.createElement("div");
+confetti.className="confetti";
+confetti.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+confetti.style.left=Math.random()*100+"vw";
+document.body.appendChild(confetti);
+setTimeout(()=>confetti.remove(),4000);
+}
+}
+
+</script>
+
+</body>
+</html>

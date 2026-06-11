@@ -13,14 +13,16 @@ body{font-family:Poppins,sans-serif;background:linear-gradient(135deg,#ff8fb1,#f
 h1,h2{font-family:'Dancing Script',cursive}
 h1{font-size:4rem}
 .envelope-wrap{display:flex;justify-content:center;align-items:center;min-height:100vh}
-.envelope{width:220px;height:140px;background:#fff;position:relative;border-radius:10px;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,.2)}
+.envelope{width:220px;height:140px;background:#fff;position:relative;border-radius:10px;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,.2);animation:glow 2s infinite alternate}
+@keyframes glow{from{box-shadow:0 0 15px rgba(255,255,255,.5)}to{box-shadow:0 0 35px rgba(255,105,180,.8)}}
 .flap{position:absolute;top:0;left:0;width:100%;height:100%;background:#ffd1df;clip-path:polygon(0 0,100% 0,50% 60%);transform-origin:top;transition:1s}
 .envelope.open .flap{transform:rotateX(180deg)}
 #story{display:none}
 .type{min-height:180px;line-height:1.8;color:#444}
 .gallery{display:flex;overflow:auto;gap:12px;padding:20px}
-.gallery img{width:250px;height:340px;object-fit:cover;border-radius:20px}
-.btn{padding:14px 24px;border:none;border-radius:999px;background:#ff4f8b;color:white;font-weight:bold;cursor:pointer}
+.gallery img{width:260px;height:360px;object-fit:cover;border-radius:24px;flex-shrink:0;transition:.4s}
+.gallery img:hover{transform:scale(1.05)}
+.btn{padding:14px 24px;border:none;border-radius:999px;background:#ff4f8b;color:white;font-weight:bold;cursor:pointer;margin:6px}
 .heart,.petal{position:fixed;pointer-events:none}
 .heart{bottom:-30px;animation:float 8s linear forwards}
 @keyframes float{to{transform:translateY(-120vh);opacity:0}}
@@ -33,6 +35,10 @@ h1{font-size:4rem}
 </head>
 <body>
 
+<audio id="bgMusic" loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
+
 <div class="envelope-wrap" id="start">
 <div class="envelope" onclick="openEnvelope()">
 <div class="flap"></div>
@@ -44,6 +50,7 @@ h1{font-size:4rem}
 <section class="section">
 <div class="card">
 <h1>Anku ❤️</h1>
+<button class="btn" onclick="toggleMusic()">🎵 Play / Pause Our Song</button>
 <div id="typing" class="type"></div>
 </div>
 </section>
@@ -52,9 +59,7 @@ h1{font-size:4rem}
 <div class="card">
 <h2>Our Memories ❤️</h2>
 <div class="gallery">
-<img src="photo1.jpg"><img src="photo2.jpg"><img src="photo3.jpg"><img src="photo4.jpg"><img src="photo5.jpg">
-<img src="photo6.jpg"><img src="photo7.jpg"><img src="photo8.jpg"><img src="photo9.jpg"><img src="photo10.jpg">
-<img src="photo11.jpg"><img src="photo12.jpg"><img src="photo13.jpg"><img src="photo14.jpg"><img src="photo15.jpg">
+<img src="photo1.jpg"><img src="photo2.jpg"><img src="photo3.jpg"><img src="photo4.jpg"><img src="photo5.jpg"><img src="photo6.jpg"><img src="photo7.jpg">
 </div>
 <p>Turns out my favorite place isn't Goa. It's wherever you're standing. ❤️</p>
 </div>
@@ -81,6 +86,7 @@ h1{font-size:4rem}
 <div class="line">Just you.</div>
 <div class="line">Always you ❤️</div>
 <p style="margin-top:30px">Last night, you wanted just our time and not the bullshit talks, I understand your point definitely. I am so sorry i love you a lot an i am going to miss you soo muchhh. You are my whole world take care of yourself!</p>
+<p id="secretMessage" style="opacity:0;margin-top:25px;transition:2s;">❤️ PS: When you come back, I still owe you the conversation we should have had that night.</p>
 </div>
 </div>
 
@@ -111,14 +117,21 @@ function openEnvelope(){
  setTimeout(()=>{
   document.getElementById('start').style.display='none';
   document.getElementById('story').style.display='block';
+  const music=document.getElementById('bgMusic');
+  music.play().catch(()=>{});
   typeWriter();
  },1000);
+}
+
+function toggleMusic(){
+ const music=document.getElementById('bgMusic');
+ if(music.paused){music.play();} else {music.pause();}
 }
 
 let i=0;
 function typeWriter(){
  if(i<text.length){
-  document.getElementById('typing').innerHTML += text.charAt(i)==='\n' ? '<br>' : text.charAt(i);
+  document.getElementById('typing').innerHTML += text.charAt(i)=='\n' ? '<br>' : text.charAt(i);
   i++;
   setTimeout(typeWriter,30);
  }
@@ -150,6 +163,9 @@ function showFinal(){
  document.querySelectorAll('.line').forEach((el,idx)=>{
    setTimeout(()=>{el.style.opacity=1;}, idx*1000);
  });
+ setTimeout(()=>{
+  document.getElementById("secretMessage").style.opacity=1;
+ },7000);
  for(let i=0;i<80;i++){setTimeout(heart,i*40);}
 }
 </script>

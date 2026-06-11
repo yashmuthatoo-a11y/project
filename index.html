@@ -1,336 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dekho Dekhoo</title>
-
+<title>For My Babyy Pandaa ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-
-body{
-font-family:'Poppins', sans-serif;
-background:linear-gradient(135deg,#ff758c,#ff7eb3);
-color:white;
-text-align:center;
-overflow-x:hidden;
-}
-
-section{padding:60px 15px;}
-
-.hero{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-position:relative;
-overflow:hidden;
-}
-
-.collage-bg{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-align-items:center;
-gap:12px;
-padding:20px;
-z-index:0;
-}
-
-.collage-bg img{
-width:28%;
-height:30%;
-object-fit:cover;
-border-radius:14px;
-border:4px solid rgba(255,255,255,0.6);
-box-shadow:0 8px 20px rgba(0,0,0,0.35);
-opacity:0.4;
-}
-
-.hero-content{
-position:relative;
-z-index:2;
-padding:20px;
-background:rgba(0,0,0,0.35);
-border-radius:20px;
-backdrop-filter:blur(6px);
-}
-
-.hero h1{
-font-family:'Great Vibes', cursive;
-font-size:2.5rem;
-margin-bottom:15px;
-}
-
-.letter{
-background:#fffaf0;
-color:#444;
-padding:25px 20px;
-border-radius:15px;
-max-width:420px;
-margin:auto;
-line-height:1.8;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
-text-align:left;
-font-size:1.05rem;
-}
-
-.letter h2{
-font-family:'Great Vibes', cursive;
-text-align:center;
-color:#ff4d6d;
-margin-bottom:15px;
-}
-
-.signature{margin-top:20px;text-align:right;font-style:italic;}
-
-button{
-border:none;
-padding:14px 28px;
-margin:12px 8px;
-font-size:16px;
-border-radius:30px;
-cursor:pointer;
-transition:0.3s;
-}
-
-.yes{background:#ff2e63;color:white;}
-.yes:hover{transform:scale(1.1);} 
-.no{background:#eee;color:black;}
-
-.heart,.petal,.confetti{position:fixed;pointer-events:none;}
-
-.heart{animation:float 6s linear infinite;}
-.petal{animation:fall 8s linear infinite;font-size:20px;}
-.confetti{animation:confettiFall 4s linear forwards;font-size:20px;}
-
-@keyframes float{from{transform:translateY(100vh);} to{transform:translateY(-10vh);opacity:0;}}
-@keyframes fall{from{transform:translateY(-10vh) rotate(0deg);} to{transform:translateY(110vh) rotate(360deg);opacity:0;}}
-@keyframes confettiFall{from{transform:translateY(-10vh) rotate(0deg);} to{transform:translateY(110vh) rotate(720deg);opacity:0;}}
-
-.valentine-line{
-margin-top:15px;
-font-size:1.2rem;
-opacity:0;
-animation:fadeGlow 3s ease forwards 1.5s;
-}
-
-@keyframes fadeGlow{
-0%{opacity:0;transform:translateY(20px);} 
-100%{opacity:1;text-shadow:0 0 10px #ff4d6d;} 
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Poppins,sans-serif;background:linear-gradient(135deg,#ff8fb1,#ffd6e7,#fff);overflow-x:hidden}
+.section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:rgba(255,255,255,.18);backdrop-filter:blur(15px);padding:30px;border-radius:30px;max-width:700px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+h1,h2{font-family:'Dancing Script',cursive}
+h1{font-size:4rem}
+.envelope-wrap{display:flex;justify-content:center;align-items:center;min-height:100vh}
+.envelope{width:220px;height:140px;background:#fff;position:relative;border-radius:10px;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,.2)}
+.flap{position:absolute;top:0;left:0;width:100%;height:100%;background:#ffd1df;clip-path:polygon(0 0,100% 0,50% 60%);transform-origin:top;transition:1s}
+.envelope.open .flap{transform:rotateX(180deg)}
+#story{display:none}
+.type{min-height:180px;line-height:1.8;color:#444}
+.gallery{display:flex;overflow:auto;gap:12px;padding:20px}
+.gallery img{width:250px;height:340px;object-fit:cover;border-radius:20px}
+.btn{padding:14px 24px;border:none;border-radius:999px;background:#ff4f8b;color:white;font-weight:bold;cursor:pointer}
+.heart,.petal{position:fixed;pointer-events:none}
+.heart{bottom:-30px;animation:float 8s linear forwards}
+@keyframes float{to{transform:translateY(-120vh);opacity:0}}
+.petal{top:-20px;animation:fall 10s linear forwards}
+@keyframes fall{to{transform:translateY(120vh) rotate(360deg)}}
+.final{display:none;text-align:center;padding:60px}
+.line{opacity:0;font-size:2rem;margin:10px;transition:1s;color:#fff}
+.dark{background:#1d1020;color:white}
 </style>
 </head>
-
 <body>
 
-<!-- Put your romantic song file (example: kesariya.mp3) in the same folder as this HTML file -->
-<audio id="music" loop>
-<source src="Aaj Se Teri .mpeg" type="audio/mpeg">
-</audio>
-
-<section class="hero">
-<div class="collage-bg">
-<img src="photo1 (4).jpeg"><img src="photo1 (11).jpeg"><img src="photo1 (12).jpeg"><img src="photo1 (7).jpeg"><img src="photo3.jpeg">
+<div class="envelope-wrap" id="start">
+<div class="envelope" onclick="openEnvelope()">
+<div class="flap"></div>
+<div style="padding-top:85px;text-align:center;font-weight:bold">For Anku ❤️</div>
 </div>
-<div class="hero-content">
-<h1>For My Baby Panda 🐼❤️</h1>
-<p>A Love Letter From Your Dholu</p>
-<p style="font-size:0.9rem;opacity:0.85;">Tap anywhere & scroll slowly ❤️</p>
 </div>
-</section>
 
-<section>
-<div class="letter">
-<h2>My Dearest Baby Panda 💌</h2>
-<p id="typedText"></p>
-<div class="signature">Forever yours,<br>Your Dholu ❤️</div>
+<div id="story">
+<section class="section">
+<div class="card">
+<h1>Anku ❤️</h1>
+<div id="typing" class="type"></div>
 </div>
 </section>
 
-<section>
-<h1>Will You Be My Valentine? ❤️</h1>
-<button class="yes" onclick="sayYes()">YES 💕</button>
-<button class="no" onclick="growYes(this)">No 😢</button>
+<section class="section">
+<div class="card">
+<h2>Our Memories ❤️</h2>
+<div class="gallery">
+<img src="photo1.jpg"><img src="photo2.jpg"><img src="photo3.jpg"><img src="photo4.jpg"><img src="photo5.jpg">
+<img src="photo6.jpg"><img src="photo7.jpg"><img src="photo8.jpg"><img src="photo9.jpg"><img src="photo10.jpg">
+<img src="photo11.jpg"><img src="photo12.jpg"><img src="photo13.jpg"><img src="photo14.jpg"><img src="photo15.jpg">
+</div>
+<p>Turns out my favorite place isn't Goa. It's wherever you're standing. ❤️</p>
+</div>
 </section>
+
+<section class="section">
+<div class="card">
+<h2>What You Wanted ❤️</h2>
+<p>📱 Watch reels together</p>
+<p>🥺 Talk about us</p>
+<p>💭 Talk about how much we'd miss each other</p>
+<p>✨ Make one more memory</p>
+<br>
+<p>And somehow I got distracted from the most important thing... you.</p>
+<br>
+<button class="btn" onclick="showFinal()">💖 Forgive Me?</button>
+</div>
+</section>
+
+<div class="final dark" id="final">
+<div class="line">Not Goa.</div>
+<div class="line">Not plans.</div>
+<div class="line">Not distractions.</div>
+<div class="line">Just you.</div>
+<div class="line">Always you ❤️</div>
+<p style="margin-top:30px">Last night, you wanted just our time and not the bullshit talks, I understand your point definitely. I am so sorry i love you a lot an i am going to miss you soo muchhh. You are my whole world take care of yourself!</p>
+</div>
+</div>
 
 <script>
+const text=`The Conversation We Should Have Had Last Night ❤️
 
-/* ---------- MUSIC ---------- */
-function playMusic(){
-const music=document.getElementById("music");
-if(music && music.paused){music.play().catch(()=>{});}
+Last night wasn't supposed to be about Goa.
+
+It was supposed to be about us.
+
+About watching reels together.
+About talking about how much we'd miss each other.
+About making one more memory before your trip.
+
+You weren't asking for anything complicated.
+
+You just wanted me.
+My attention.
+My presence.
+My time.
+
+And you deserved all of it.
+
+I'm sorry, Anku ❤️`;
+
+function openEnvelope(){
+ document.querySelector('.envelope').classList.add('open');
+ setTimeout(()=>{
+  document.getElementById('start').style.display='none';
+  document.getElementById('story').style.display='block';
+  typeWriter();
+ },1000);
 }
-// Try multiple user interactions to guarantee music plays
-["click","touchstart","scroll"].forEach(event=>{
-  window.addEventListener(event, playMusic, { once:true });
-});
-
-/* ---------- TYPEWRITER ---------- */
-const text=`From the moment you stepped into my life, everything changed… like my life suddenly turned into the most beautiful love story ever written. 🌙✨
-
-Before you, life was normal… but after you, every moment started feeling special, brighter, warmer… like my heart finally found the place it was always meant to belong. ❤️
-
-Every laugh we share, every hug that feels like home, and every single moment I spend with you feels magical… like scenes straight out of a dream that I never want to wake up from. 🎬💞
-
-From sharing one AirPod while vibing to our favourite songs on bike rides 🎧🏍️…  
-To our endless random talks, silly jokes, and memories that only we understand… those small moments with you mean more to me than anything in this world. They are the moments where I feel truly complete. 🧸💖
-
-Since the day our story truly began on 14th February 2022… my love for you has only grown stronger, deeper, and more certain with every passing day. 💓
-
-You are not just someone I love…  
-You are someone I see in every part of my future. 📖✨
-
-I see you standing beside me when life gives us victories… 🏆  
-I see you holding my hand when life tests us… 🤝  
-I see us growing together, supporting each other, and building a life filled with love, laughter, and warmth. 🏡💫
-
-You are my peace after every storm…  
-My happiness in every moment…  
-My strength when life feels heavy…  
-And my home, no matter where we are. 🌍❤️
-
-I promise to stand by your side no matter what life brings.  
-I promise to hold your hand through every storm and celebrate every sunshine with you.  
-I promise to love you harder on your worst days and make you smile even when life feels difficult. 💍✨
-
-I cannot wait for the day I get to marry you, build our little cute family together, and grow old with you while still teasing you, laughing with you, and loving you just like I do today. 👰🤵💞
-
-I dream about waking up every morning beside you… ☀️  
-Holding you close in my arms… 🤗  
-Gently kissing your forehead… 😘  
-And thanking life every single day for giving me you. 🌹
-
-You are not just my love…  
-You are my forever…  
-My once-in-a-lifetime blessing…  
-My greatest dream come true. ✨💖
-
-And today… I want to ask you something that comes straight from the deepest part of my heart... 💌❤️
-`;
 
 let i=0;
 function typeWriter(){
-if(i<text.length){
-document.getElementById("typedText").innerHTML+=text.charAt(i);
-i++;
-setTimeout(typeWriter,35);
-}}
-typeWriter();
-
-/* ---------- YES ---------- */
-function sayYes(){
-const bgPhoto="photo34.jpeg";
-
-document.body.innerHTML=`
-<style>
-body{margin:0;font-family:'Poppins';height:100vh;display:flex;justify-content:center;align-items:center;background:url('${bgPhoto}') center/cover no-repeat;position:relative;overflow:hidden;color:white;}
-body::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.45);} 
-.forever-card{position:relative;z-index:2;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);padding:45px 35px;border-radius:28px;text-align:center;max-width:500px;}
-.forever-card h1{font-family:'Great Vibes', cursive;font-size:2.6rem;margin-bottom:15px;}
-</style>
-
-<div class="forever-card">
-<h1>She Said YES 💍❤️</h1>
-<p>This is the beginning of our forever.</p>
-<h2>Dholu ❤️ Baby Panda Forever</h2>
-<p class="valentine-line">Get ready for a great Valentine's Day ❤️</p>
-</div>`;
-
-createHearts();
-createPetals();
-setTimeout(createConfetti,1500);
+ if(i<text.length){
+  document.getElementById('typing').innerHTML += text.charAt(i)==='\n' ? '<br>' : text.charAt(i);
+  i++;
+  setTimeout(typeWriter,30);
+ }
 }
 
-/* ---------- NO BUTTON ---------- */
-let noClickCount = 0;
-
-function growYes(btn){
-noClickCount++;
-
-const yesBtn = document.querySelector('.yes');
-
-if(noClickCount === 1){
-btn.style.position = "relative";
-btn.style.left = (Math.random() - 0.5) * 120 + "px";
-btn.style.top = (Math.random() - 0.5) * 60 + "px";
+function heart(){
+ let h=document.createElement('div');
+ h.className='heart';
+ h.innerHTML=['❤️','💕','💖'][Math.floor(Math.random()*3)];
+ h.style.left=Math.random()*100+'vw';
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),8000);
 }
+setInterval(heart,300);
 
-if(noClickCount === 2){
-btn.style.transform = "scale(0.6)";
+function petal(){
+ let p=document.createElement('div');
+ p.className='petal';
+ p.innerHTML='🌹';
+ p.style.left=Math.random()*100+'vw';
+ document.body.appendChild(p);
+ setTimeout(()=>p.remove(),10000);
 }
+setInterval(petal,1200);
 
-if(noClickCount === 3){
-btn.style.animation = "spinNo 0.8s linear infinite";
-
-// Run away while spinning
-setInterval(()=>{
-btn.style.position = "relative";
-btn.style.left = (Math.random() - 0.5) * 250 + "px";
-btn.style.top = (Math.random() - 0.5) * 150 + "px";
-},700);
+function showFinal(){
+ document.getElementById('final').style.display='block';
+ document.getElementById('final').scrollIntoView({behavior:'smooth'});
+ document.querySelectorAll('.line').forEach((el,idx)=>{
+   setTimeout(()=>{el.style.opacity=1;}, idx*1000);
+ });
+ for(let i=0;i<80;i++){setTimeout(heart,i*40);}
 }
-
-if(noClickCount >= 4){
-const container = btn.parentElement;
-container.innerHTML = `
-<button class="yes" onclick="sayYes()" style="font-size:20px;padding:18px 34px;">
-🐼 Baby Panda… Dholu ka dil mat todo… Only YES allowed ❤️
-</button>`;
-return;
-}
-
-let scale = parseFloat(yesBtn.dataset.scale || 1);
-scale += 0.2;
-yesBtn.dataset.scale = scale;
-yesBtn.style.transform = `scale(${scale})`;
-}
-
-/* ---------- ANIMATIONS ---------- */
-function createHearts(){
-setInterval(()=>{
-const heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="❤️";
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=Math.random()*25+15+"px";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),6000);
-},300);
-}
-
-function createPetals(){
-setInterval(()=>{
-const petal=document.createElement("div");
-petal.className="petal";
-petal.innerHTML="🌹";
-petal.style.left=Math.random()*100+"vw";
-document.body.appendChild(petal);
-setTimeout(()=>petal.remove(),8000);
-},800);
-}
-
-function createConfetti(){
-const emojis=["🎉","✨","💖","🎊"];
-for(let i=0;i<40;i++){
-const confetti=document.createElement("div");
-confetti.className="confetti";
-confetti.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
-confetti.style.left=Math.random()*100+"vw";
-document.body.appendChild(confetti);
-setTimeout(()=>confetti.remove(),4000);
-}
-}
-
 </script>
-
 </body>
 </html>

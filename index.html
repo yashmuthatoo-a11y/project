@@ -7,30 +7,142 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Poppins,sans-serif;background:linear-gradient(135deg,#ff8fb1,#ffd6e7,#fff);overflow-x:hidden}
-.section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.card{background:rgba(255,255,255,.18);backdrop-filter:blur(15px);padding:30px;border-radius:30px;max-width:700px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.15)}
-h1,h2{font-family:'Dancing Script',cursive}
-h1{font-size:4rem}
-.envelope-wrap{display:flex;justify-content:center;align-items:center;min-height:100vh}
-.envelope{width:220px;height:140px;background:#fff;position:relative;border-radius:10px;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,.2);animation:glow 2s infinite alternate}
-@keyframes glow{from{box-shadow:0 0 15px rgba(255,255,255,.5)}to{box-shadow:0 0 35px rgba(255,105,180,.8)}}
-.flap{position:absolute;top:0;left:0;width:100%;height:100%;background:#ffd1df;clip-path:polygon(0 0,100% 0,50% 60%);transform-origin:top;transition:1s}
-.envelope.open .flap{transform:rotateX(180deg)}
-#story{display:none}
-.type{min-height:180px;line-height:1.8;color:#444}
-.gallery{display:flex;overflow:auto;gap:12px;padding:20px}
-.gallery img{width:260px;height:360px;object-fit:cover;border-radius:24px;flex-shrink:0;transition:.4s}
-.gallery img:hover{transform:scale(1.05)}
-.btn{padding:14px 24px;border:none;border-radius:999px;background:#ff4f8b;color:white;font-weight:bold;cursor:pointer;margin:6px}
-.heart,.petal{position:fixed;pointer-events:none}
-.heart{bottom:-30px;animation:float 8s linear forwards}
-@keyframes float{to{transform:translateY(-120vh);opacity:0}}
-.petal{top:-20px;animation:fall 10s linear forwards}
-@keyframes fall{to{transform:translateY(120vh) rotate(360deg)}}
-.final{display:none;text-align:center;padding:60px}
-.line{opacity:0;font-size:2rem;margin:10px;transition:1s;color:#fff}
-.dark{background:#1d1020;color:white}
+body{
+font-family:Poppins,sans-serif;
+background:linear-gradient(135deg,#ff8fb1,#ffd6e7,#fff);
+overflow-x:hidden;
+padding-top:env(safe-area-inset-top);
+padding-bottom:env(safe-area-inset-bottom);
+}
+
+.section{
+min-height:100svh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:clamp(16px,4vw,32px);
+}
+
+.card{
+background:rgba(255,255,255,.18);
+backdrop-filter:blur(15px);
+width:min(92vw,700px);
+padding:clamp(18px,4vw,35px);
+border-radius:30px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+margin:auto;
+}
+
+h1,h2{
+font-family:'Dancing Script',cursive;
+}
+
+h1{
+font-size:clamp(2.8rem,10vw,5rem);
+}
+
+h2{
+font-size:clamp(2rem,7vw,3.5rem);
+}
+
+.envelope-wrap{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100svh;
+padding:20px;
+}
+
+.envelope{
+width:min(80vw,340px);
+aspect-ratio:1.6/1;
+background:#fff;
+position:relative;
+border-radius:10px;
+cursor:pointer;
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+animation:glow 2s infinite alternate;
+}
+
+.type{
+min-height:30vh;
+line-height:1.9;
+font-size:clamp(.95rem,2.5vw,1.15rem);
+color:#444;
+text-align:left;
+}
+
+.gallery{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:24px;
+padding:20px 0;
+}
+
+.gallery img{
+width:min(90vw,380px);
+height:auto;
+aspect-ratio:3/4;
+object-fit:cover;
+border-radius:24px;
+transition:.4s;
+box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.gallery img:hover{
+transform:scale(1.03);
+}
+
+.btn{
+padding:clamp(12px,3vw,16px) clamp(20px,5vw,28px);
+border:none;
+border-radius:999px;
+background:#ff4f8b;
+color:white;
+font-weight:bold;
+cursor:pointer;
+margin:8px;
+font-size:clamp(.9rem,2.5vw,1rem);
+}
+
+.line{
+opacity:0;
+font-size:clamp(2rem,8vw,4rem);
+margin:10px;
+transition:1s;
+color:#fff;
+padding:0 20px;
+text-align:center;
+}
+
+.final{
+display:none;
+text-align:center;
+padding:clamp(30px,8vw,60px);
+}
+
+.dark{
+background:#1d1020;
+color:white;
+}
+
+@media (min-width:768px){
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.gallery img{
+width:100%;
+max-width:none;
+}
+
+}
+
 </style>
 </head>
 <body>
